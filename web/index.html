@@ -2,37 +2,57 @@
 
 <html lang="en">
 
-  <heading>
-    <h1>Survival Nexus</h1>
-    <a href="Priority supplies Communications">Priority supplies</a>
-    <a href="Communications">Communication</a>
-    <p>An outbreak has scattered the resistance. This terminal shows shelter status and priority supplies for the survivors.
-    </p>
-  </heading>
+<head>
+  <script src="js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Nexus</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
 
-  <body>
-    <subheading>
-      <h2>Shelter Status</h2>
-      <p>Power is restored.</p>
-      <p>The main gate is secured.</p>
-    </subheading>
+<body>
 
-    <subheading>
-      <h2>Priority supplies</h2>
-        <ol>
-          <id="#radiostatus"></id>
-          <li>Water</li><br>
-          <li>Food</li><br>
-          <li>Medication</li><br>
-          <li>Vaccine</li><br>
-        </ol>
-    </subheading> 
+    <header>
+      <h1>Survival Nexus</h1>
 
-    <subheading>
-      <h2>Communications</h2>
-      <p>Local radio channel is online.</p>
-      <p>Remote relay is offline.</p>
-      <p>This page uses fictional training data.</p>
-    </subheading>
+      <nav>
+        <a href="#priority-supplies">Priority supplies</a>
+        <a href="#communications">Communication</a>
+      </nav>
+
+      <p>
+        An outbreak has scattered the resistance. This terminal shows shelter status and priority supplies for the survivors.
+      </p>
+    </header>
+  
+    <main></main>
+      <section>
+        <h2>Shelter Status</h2>
+        <p>Power is restored.</p>
+        <p>The main gate is secured.</p>
+      </section>
+
+      <section id="priority-supplies">
+        <h2>Priority supplies</h2>
+          <ul>
+            <li>Water</li>
+            <li>Food</li>
+            <li>Medication</li>
+            <li>Vaccine</li>
+          </ul>
+      </section>
+
+      <section id="communications">
+        <h2>Communications</h2>
+        <p>Local radio channel is online.</p>
+        <p>Remote relay is offline.</p>
+        <p>This page uses fictional training data.</p>
+      </section>
+
+      <footer>
+        <p>THIS PAGE IS FICTIONAL</p>
+      </footer>
+
+    </main>
   </body>
 </html>
