@@ -225,3 +225,105 @@ if (sourceInfected === true) {
 } else {
     console.log("Supply request rejected: Invalid information");
 }
+
+// ACTIVITY 05 - SHELTER WATER COVERAGE
+
+function calculateShelterCoverage(waterCounts, dailyRequirement) {
+
+    //Validate the daily requirement
+    if (
+        !Number.isSafeInteger(dailyRequirement) ||
+        dailyRequirement <= 0
+    ) {
+        console.log("Calculation rejected: Invalid daily requirement");
+        return null;
+    }
+
+    //Validate the water dataset
+    if (!Array.isArray(waterCounts)) {
+        console.log("Calculation rejected: Invalid water dataset");
+        return null;
+    }
+
+    // Check every shelters water stock before calculating
+    for (let i = 0; i < waterCounts.length; i++) {
+
+        const stock = waterCounts[i];
+
+        if (
+            !Number.isSafeInteger(stock) ||
+            stock < 0 ||
+            stock > 1000000
+        ) {
+            console.log(
+                "Calculation rejected: Invalid stock at position",
+                i + 1
+            );
+            return null;
+        }
+    }
+
+    // Calculate coverage and total water
+    let totalWater = 0;
+    let sheltersBelowTwoDays = 0;
+    const coverage = [];
+
+    for (const count of waterCounts) {
+
+        // Calculate complete days of water coverage
+        const completeDays = Math.floor(count / dailyRequirement);
+
+        // Store the coverage for each shelter
+        coverage.push(completeDays);
+
+        // Add the shelter's water to the total
+        totalWater += count;
+
+        // Count shelters with fewer than 2 complete days
+        if (completeDays < 2) {
+            sheltersBelowTwoDays++;
+        }
+    }
+
+    //Validate the total
+    if (!Number.isSafeInteger(totalWater)) {
+        console.log(
+            "Calculation rejected: Total water exceeds safe integer limit"
+        );
+        return null;
+    }
+
+    //Create the final report
+    const report = {
+        coverage: coverage,
+        totalWater: totalWater,
+        shelterCount: waterCounts.length,
+        sheltersBelowTwoDays: sheltersBelowTwoDays
+    };
+
+    //Display the report
+    console.log("Shelter Water Coverage Report:");
+    console.log("Coverage:", report.coverage);
+    console.log("Total water:", report.totalWater);
+    console.log("Number of shelters:", report.shelterCount);
+    console.log(
+        "Shelters below two days:",
+        report.sheltersBelowTwoDays
+    );
+
+    return report;
+}
+console.log("\n--- MAIN ACTIVITY TEST ---");
+calculateShelterCoverage([12, 9, 0], 3);
+
+console.log("\n--- INDEPENDENT TASK ---");
+calculateShelterCoverage([6, 3, 15, 1], 3);
+
+console.log("\n--- EMPTY ARRAY TEST ---");
+calculateShelterCoverage([], 3);
+
+console.log("\n--- INVALID DAILY REQUIREMENT TEST ---");
+calculateShelterCoverage([12, 9, 0], 0);
+
+console.log("\n--- INVALID DATASET TEST ---");
+calculateShelterCoverage([3, -1, 6], 3);
