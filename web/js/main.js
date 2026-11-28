@@ -1,11 +1,13 @@
 
+import { daysOfSupplies } from "./domain.js";
+
 // WATER SUPPLIES
 let waterIsValid = true;
 
 const waterUnits = 18;
 if (
     Number.isSafeInteger(waterUnits) &&
-    waterUnits >=0 &&
+    waterUnits >= 0 &&
     waterUnits <= 1000000
 ) {
     console.log("Valid stock");
@@ -14,11 +16,10 @@ if (
     waterIsValid = false;
 }
 
-
 const survivorCount = 6;
 if (
     Number.isSafeInteger(survivorCount) &&
-    survivorCount > 0 
+    survivorCount > 0
 ) {
     console.log("Valid survivor count");
 } else {
@@ -26,63 +27,69 @@ if (
     waterIsValid = false;
 }
 
-
 const waterPerSurvivor = 2;
 if (
     Number.isSafeInteger(waterPerSurvivor) &&
     waterPerSurvivor > 0
 ) {
-    console.log("Valid");
+    console.log("Valid water needed per survivor");
 } else {
-    console.log("Invalid");
+    console.log("Invalid water needed per survivor");
     waterIsValid = false;
 }
 
 const waterDailyDemand = survivorCount * waterPerSurvivor;
+
 if (
     Number.isSafeInteger(waterDailyDemand) &&
-    waterDailyDemand > 0
+    waterDailyDemand > 0 &&
+    waterDailyDemand <= 1000000
 ) {
-    console.log("Valid");
+    console.log("Valid daily water demand");
 } else {
-    console.log("Invalid");
+    console.log("Invalid daily water demand");
     waterIsValid = false;
 }
 
 if (waterIsValid) {
+    const waterCompleteDays = daysOfSupplies(
+        waterUnits,
+        waterDailyDemand
+    );
 
-const waterCompleteDays = Math.floor(waterUnits / waterDailyDemand);
-if (
-    Number.isSafeInteger(waterCompleteDays) &&
-    waterCompleteDays >= 0
-) {
-    console.log("Valid complete days");
-} else {
-    console.log("Invalid complete days");
-    waterIsValid = false;
-}
+    if (
+        Number.isSafeInteger(waterCompleteDays) &&
+        waterCompleteDays >= 0
+    ) {
+        console.log("Valid complete days");
+    } else {
+        console.log("Invalid complete days");
+        waterIsValid = false;
+    }
 
-const waterLeftover = waterUnits - (waterCompleteDays * waterDailyDemand);
-if (
-    Number.isSafeInteger(waterLeftover) &&
-    waterLeftover >= 0
-) {
-    console.log("Valid leftover");
-} else {
-    console.log("Invalid leftover");
-    waterIsValid = false;
-}
+    const waterLeftover =
+        waterUnits - (waterCompleteDays * waterDailyDemand);
 
-if (waterIsValid) {
-    console.log("Starting water units:", waterUnits);
-    console.log("Number of survivors:", survivorCount);
-    console.log("Water needed per survivor:", waterPerSurvivor);
-    console.log("Daily water demand:", waterDailyDemand);
-    console.log("Complete days:", waterCompleteDays);
-    console.log("Leftover water:", waterLeftover);
-} else {
-    console.log("Water calculation rejected");
-}
+    if (
+        Number.isSafeInteger(waterLeftover) &&
+        waterLeftover >= 0
+    ) {
+        console.log("Valid leftover");
+    } else {
+        console.log("Invalid leftover");
+        waterIsValid = false;
+    }
+
+    if (waterIsValid) {
+        console.log("Starting water units:", waterUnits);
+        console.log("Number of survivors:", survivorCount);
+        console.log("Water needed per survivor:", waterPerSurvivor);
+        console.log("Daily water demand:", waterDailyDemand);
+        console.log("Complete days:", waterCompleteDays);
+        console.log("Leftover water:", waterLeftover);
+    } else {
+        console.log("Water calculation rejected");
+    }
 } else {
     console.log("Water calculation rejected");
 }
@@ -105,11 +112,11 @@ if (
 const foodSurvivors = 4;
 if (
     Number.isSafeInteger(foodSurvivors) &&
-    foodSurvivors > 0 
+    foodSurvivors > 0
 ) {
-    console.log("Valid Food needed");
+    console.log("Valid food survivor count");
 } else {
-    console.log("Invalid Food needed");
+    console.log("Invalid food survivor count");
     foodIsValid = false;
 }
 
@@ -118,63 +125,69 @@ if (
     Number.isSafeInteger(foodPerSurvivor) &&
     foodPerSurvivor > 0
 ) {
-    console.log("Valid");
+    console.log("Valid food needed per survivor");
 } else {
-    console.log("Invalid");
+    console.log("Invalid food needed per survivor");
     foodIsValid = false;
 }
-
 
 const foodDailyDemand = foodSurvivors * foodPerSurvivor;
+
 if (
     Number.isSafeInteger(foodDailyDemand) &&
-    foodDailyDemand > 0
+    foodDailyDemand > 0 &&
+    foodDailyDemand <= 1000000
 ) {
-    console.log("Valid");
+    console.log("Valid daily food demand");
 } else {
-    console.log("Invalid");
+    console.log("Invalid daily food demand");
     foodIsValid = false;
 }
 
 if (foodIsValid) {
-const foodCompleteDays = Math.floor(foodUnits / foodDailyDemand);
-if (
-    Number.isSafeInteger(foodCompleteDays) &&
-    foodCompleteDays >= 0
-) {
-    console.log("Valid complete days");
-} else {
-    console.log("Invalid complete days");
-    foodIsValid = false;
-}
+    const foodCompleteDays = daysOfSupplies(
+        foodUnits,
+        foodDailyDemand
+    );
 
-const foodLeftover = foodUnits - (foodCompleteDays * foodDailyDemand);
-if (
-    Number.isSafeInteger(foodLeftover) &&
-    foodLeftover >= 0
-) {
-    console.log("Valid leftover");
-} else {
-    console.log("Invalid leftover");
-    foodIsValid = false;
-}
+    if (
+        Number.isSafeInteger(foodCompleteDays) &&
+        foodCompleteDays >= 0
+    ) {
+        console.log("Valid complete days");
+    } else {
+        console.log("Invalid complete days");
+        foodIsValid = false;
+    }
 
-if (foodIsValid) {
-    console.log("Starting food units:", foodUnits);
-    console.log("Number of survivors:", foodSurvivors);
-    console.log("Food needed per survivor:", foodPerSurvivor);
-    console.log("Daily food demand:", foodDailyDemand);
-    console.log("Complete days:", foodCompleteDays);
-    console.log("Leftover food:", foodLeftover);
+    const foodLeftover =
+        foodUnits - (foodCompleteDays * foodDailyDemand);
+
+    if (
+        Number.isSafeInteger(foodLeftover) &&
+        foodLeftover >= 0
+    ) {
+        console.log("Valid leftover");
+    } else {
+        console.log("Invalid leftover");
+        foodIsValid = false;
+    }
+
+    if (foodIsValid) {
+        console.log("Starting food units:", foodUnits);
+        console.log("Number of survivors:", foodSurvivors);
+        console.log("Food needed per survivor:", foodPerSurvivor);
+        console.log("Daily food demand:", foodDailyDemand);
+        console.log("Complete days:", foodCompleteDays);
+        console.log("Leftover food:", foodLeftover);
+    } else {
+        console.log("Food calculation rejected");
+    }
 } else {
     console.log("Food calculation rejected");
 }
 
-} else {
-    console.log("Food calculation rejected");
-}
-
-//REQUEST
+// REQUEST
 let supplyIsValid = true;
 
 let supplyStock = 5;
@@ -211,17 +224,16 @@ if (typeof sourceInfected === "boolean") {
 }
 
 if (supplyIsValid) {
-if (sourceInfected === true) {
-    console.log("Supply request rejected: Source is infected");
-} else if (requestedQuantity > supplyStock) {
-    console.log("Supply request rejected: Not enough stock");
-} else {
-    supplyStock = supplyStock - requestedQuantity;
+    if (sourceInfected === true) {
+        console.log("Supply request rejected: Source is infected");
+    } else if (requestedQuantity > supplyStock) {
+        console.log("Supply request rejected: Not enough stock");
+    } else {
+        supplyStock = supplyStock - requestedQuantity;
 
-    console.log("Supply request approved");
-    console.log("Remaining supply stock:", supplyStock);
-}
-
+        console.log("Supply request approved");
+        console.log("Remaining supply stock:", supplyStock);
+    }
 } else {
     console.log("Supply request rejected: Invalid information");
 }
@@ -230,24 +242,24 @@ if (sourceInfected === true) {
 
 function calculateShelterCoverage(waterCounts, dailyRequirement) {
 
-    //Validate the daily requirement
+    // Validate the daily requirement
     if (
         !Number.isSafeInteger(dailyRequirement) ||
-        dailyRequirement <= 0
+        dailyRequirement < 1 ||
+        dailyRequirement > 1000000
     ) {
         console.log("Calculation rejected: Invalid daily requirement");
         return null;
     }
 
-    //Validate the water dataset
+    // Validate the water dataset
     if (!Array.isArray(waterCounts)) {
         console.log("Calculation rejected: Invalid water dataset");
         return null;
     }
 
-    // Check every shelters water stock before calculating
+    // Check every shelter's water stock before calculating
     for (let i = 0; i < waterCounts.length; i++) {
-
         const stock = waterCounts[i];
 
         if (
@@ -270,22 +282,21 @@ function calculateShelterCoverage(waterCounts, dailyRequirement) {
 
     for (const count of waterCounts) {
 
-        // Calculate complete days of water coverage
-        const completeDays = Math.floor(count / dailyRequirement);
+        // Reuse the Activity 06 supply calculation
+        const completeDays = daysOfSupplies(
+            count,
+            dailyRequirement
+        );
 
-        // Store the coverage for each shelter
         coverage.push(completeDays);
-
-        // Add the shelter's water to the total
         totalWater += count;
 
-        // Count shelters with fewer than 2 complete days
         if (completeDays < 2) {
             sheltersBelowTwoDays++;
         }
     }
 
-    //Validate the total
+    // Validate the total
     if (!Number.isSafeInteger(totalWater)) {
         console.log(
             "Calculation rejected: Total water exceeds safe integer limit"
@@ -293,7 +304,7 @@ function calculateShelterCoverage(waterCounts, dailyRequirement) {
         return null;
     }
 
-    //Create the final report
+    // Create the final report
     const report = {
         coverage: coverage,
         totalWater: totalWater,
@@ -301,7 +312,7 @@ function calculateShelterCoverage(waterCounts, dailyRequirement) {
         sheltersBelowTwoDays: sheltersBelowTwoDays
     };
 
-    //Display the report
+    // Display the report
     console.log("Shelter Water Coverage Report:");
     console.log("Coverage:", report.coverage);
     console.log("Total water:", report.totalWater);
@@ -313,6 +324,9 @@ function calculateShelterCoverage(waterCounts, dailyRequirement) {
 
     return report;
 }
+
+// ACTIVITY 05 TESTS
+
 console.log("\n--- MAIN ACTIVITY TEST ---");
 calculateShelterCoverage([12, 9, 0], 3);
 
